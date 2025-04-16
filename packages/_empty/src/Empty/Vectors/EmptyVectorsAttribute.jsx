@@ -60,7 +60,7 @@ const EmptyVectorsAttributeAsyncAction = createAsyncGraphQLAction(
     processVectorAttributeFromGraphQLResult("vectors")
 )
 
-export const EmptyVectorsAttributeInifite = ({empty}) => { 
+export const EmptyVectorsAttributeInfinite = ({empty}) => { 
     const {vectors} = empty
 
     return (
