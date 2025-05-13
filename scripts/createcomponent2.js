@@ -186,19 +186,43 @@ function generateQueryOrMutation(operationName, typesByName, isMutation = false,
     const typeDef = typesByName[rootType];
     const field = typeDef.fields.find(f => f.name === operationName);
 
-    if (!field) {
-        return null;
-    }
+    if (!field) return null;
+
+    let varDefs = [];
+    let callArgs = [];
 
     const args = field.args || [];
 
-    const varDefs = args.map(arg => {
-        const named = getNamedType(arg.type);
-        const nonNull = arg.type.kind === 'NON_NULL' ? '!' : '';
-        return `$${arg.name}: ${named.name}${nonNull}`;
-    });
+    // Check if mutation has one argument of type INPUT_OBJECT → expand its fields
+    if (isMutation && args.length === 1) {
+        const inputArg = args[0];
+        const inputType = getNamedType(inputArg.type);
+        const inputDef = typesByName[inputType.name];
 
-    const callArgs = args.map(arg => `${arg.name}: $${arg.name}`);
+        if (inputDef && inputDef.kind === 'INPUT_OBJECT' && Array.isArray(inputDef.inputFields)) {
+            for (const inputField of inputDef.inputFields) {
+                const inputFieldType = getNamedType(inputField.type);
+                const nonNull = inputField.type.kind === 'NON_NULL' ? '!' : '';
+                varDefs.push(`$${inputField.name}: ${inputFieldType.name}${nonNull}`);
+                callArgs.push(`${inputField.name}: $${inputField.name}`);
+            }
+        } else {
+            // fallback – not INPUT_OBJECT or not found
+            const named = getNamedType(inputArg.type);
+            const nonNull = inputArg.type.kind === 'NON_NULL' ? '!' : '';
+            varDefs.push(`$${inputArg.name}: ${named.name}${nonNull}`);
+            callArgs.push(`${inputArg.name}: $${inputArg.name}`);
+        }
+    } else {
+        // Standard case – use arguments as-is
+        for (const arg of args) {
+            const named = getNamedType(arg.type);
+            const nonNull = arg.type.kind === 'NON_NULL' ? '!' : '';
+            varDefs.push(`$${arg.name}: ${named.name}${nonNull}`);
+            callArgs.push(`${arg.name}: $${arg.name}`);
+        }
+    }
+
     const fragmentRef = `...${capitalize(resultType)}LargeFragment`;
 
     return `${isMutation ? 'mutation' : 'query'} ${capitalize(operationName)}(${varDefs.join(', ')}) {
@@ -207,6 +231,7 @@ function generateQueryOrMutation(operationName, typesByName, isMutation = false,
     }
 }`;
 }
+
 
 /**
  * Replaces all occurrences of a target string within the input text with a replacement string,
