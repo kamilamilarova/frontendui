@@ -6,8 +6,9 @@ fragment StudyplanLink on StudyPlanGQLModel {
   __typename
   id
   lastchange
-  name
-  nameEn
+  
+
+  
 }
 `)
 
@@ -15,6 +16,20 @@ fragment StudyplanLink on StudyPlanGQLModel {
 export const StudyplanMediumFragment = createQueryStrLazy(
 `
 fragment StudyplanMedium on StudyPlanGQLModel {
+  
+  semester {
+    id
+    order
+    subject {
+      id
+      name
+      program {
+        id
+        name
+      }
+    }
+  }
+
   ...StudyplanLink
 }
 `, StudyplanLinkFragment)
@@ -22,6 +37,54 @@ fragment StudyplanMedium on StudyPlanGQLModel {
 export const StudyplanLargeFragment = createQueryStrLazy(
 `
 fragment StudyplanLarge on StudyPlanGQLModel {
+  
+  lessons {
+    name
+    id
+    lastchange
+    order
+    length
+    lessontypeId
+    event {
+      startdate
+      enddate
+    }
+    instructors {
+      id
+      name
+      surname
+    }
+    studyGroups {
+      id
+      name
+    }
+    facilities {
+      id
+      name
+    }
+    topic {
+      id
+      name
+      description
+    }
+  }
+
+  exam {
+    id
+    name
+    minScore
+    maxScore
+    description
+    lastchange
+    evaluations {
+      id
+      points
+      passed
+      studentId
+      lastchange
+    }
+  }
+    
   ...StudyplanMedium
 }
 `, StudyplanMediumFragment)

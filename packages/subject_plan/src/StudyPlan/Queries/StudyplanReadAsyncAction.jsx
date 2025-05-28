@@ -4,7 +4,7 @@ import { StudyplanLargeFragment } from "./StudyplanFragments";
 const StudyplanReadQuery = createQueryStrLazy(
 `
 query StudyplanReadQuery($id: UUID!) {
-  result: studyplanById(id: $id) {
+  result: studyPlanById(id: $id) {
     ...StudyplanLarge
   }
 }

@@ -66,6 +66,7 @@ export default defineConfig({
       "@hrbolek/uoisfrontend-shared",
       "@hrbolek/uoisfrontend-gql-shared",
       "@hrbolek/uoisfrontend-ug",
+      "@hrbolek/uoisfrontend-ug2",
       "@hrbolek/uoisfrontend-granting",
       "@hrbolek/uoisfrontend-admissions",
       "@hrbolek/uoisfrontend-requests",
@@ -90,7 +91,7 @@ export default defineConfig({
         '!../../packages/admissions/**',
         '!../../packages/requests/**',
         
-        '!../../packages/z_pack/**',
+        '!../../packages/subject_plan/**',
       ],
     },
     hmr: {

@@ -22,66 +22,110 @@ import { StudyplanMediumCard } from "./StudyplanMediumCard"
  *   <p>Additional information about the entity.</p>
  * </StudyplanMediumContent>
  */
-export const StudyplanMediumContent = ({studyplan, children}) => {
-    return (
+export const StudyplanMediumContent = ({ studyplan, children }) => {
+  const uniqueBy = (arr, keyFn) => {
+    const seen = new Set();
+    return arr.filter(item => {
+      const key = keyFn(item);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  };
+
+  const allLessons = studyplan?.lessons ?? [];
+
+  const uniqueGroups = uniqueBy(
+    allLessons.flatMap(l => l.studyGroups || []),
+    g => g.id
+  );
+
+  const uniqueRooms = uniqueBy(
+    allLessons.flatMap(l => l.facilities || []),
+    r => r.id
+  );
+
+  const uniqueInstructors = uniqueBy(
+    allLessons.flatMap(l => l.instructors || []),
+    i => i.id
+  );
+
+  return (
+    <>
+      <h2>Stránka studijního plánu</h2>
+      <p><strong>ID:</strong> {studyplan.id}</p>
+      <p><strong>Lastchange:</strong> {studyplan.lastchange}</p>
+
+      <h3>Informace o semestru</h3>
+      {studyplan?.semester ? (
+        <ul>
+          <li><strong>Semestr:</strong> {studyplan.semester.order}</li>
+          <li><strong>Předmět:</strong> {studyplan.semester.subject?.name}</li>
+          <li><strong>Program:</strong> {studyplan.semester.subject?.program?.name}</li>
+        </ul>
+      ) : (
+        <p>Semestr není k dispozici.</p>
+      )}
+
+      <h3>Lekce v plánu</h3>
+      <ul>
+        {allLessons.length > 0 ? (
+          allLessons.map((lesson, index) => (
+            <li key={lesson.id || index}>
+              {lesson.name || `Lekce #${index + 1}`}
+            </li>
+          ))
+        ) : (
+          <p>Žádné lekce</p>
+        )}
+      </ul>
+
+      <h3>Skupiny studentů</h3>
+      <ul>
+        {uniqueGroups.length > 0 ? (
+          uniqueGroups.map(group => (
+            <li key={group.id}>{group.name}</li>
+          ))
+        ) : (
+          <p>Žádné skupiny</p>
+        )}
+      </ul>
+
+      <h3>Učebny</h3>
+      <ul>
+        {uniqueRooms.length > 0 ? (
+          uniqueRooms.map(room => (
+            <li key={room.id}>{room.name}</li>
+          ))
+        ) : (
+          <p>Žádné učebny</p>
+        )}
+      </ul>
+
+      <h3>Vyučující</h3>
+      <ul>
+        {uniqueInstructors.length > 0 ? (
+          uniqueInstructors.map(instr => (
+            <li key={instr.id}>{instr.name} {instr.surname}</li>
+          ))
+        ) : (
+          <p>Žádní vyučující</p>
+        )}
+      </ul> 
+
+      <h3>Zkoušky</h3>
+      {studyplan.exam ? (
         <>
-          <h2>Stránka studijního plánu</h2>
-          <p><strong>Název:</strong> {studyplan.name}</p>
-          <p><strong>Anglický název:</strong> {studyplan.nameEn || "Bez anglického názvu"}</p>
-    
-          <h3>Informace o semestru</h3>
-          {studyplan.semester ? (
-            <ul>
-              <li><strong>Semestr:</strong> {studyplan.semester.order}</li>
-              <li><strong>Předmět:</strong> {studyplan.semester.subject?.name}</li>
-              <li><strong>Program:</strong> {studyplan.semester.subject?.program?.name}</li>
-            </ul>
-          ) : (
-            <p>Semestr není k dispozici.</p>
-          )}
-    
-          {studyplan.semester?.subject?.program && (
-            <>
-              <h4>Detail programu</h4>
-              <StudyplanMediumCard program={studyplan.semester.subject.program} />
-            </>
-          )}
-    
-          <h3>Lekce v plánu</h3>
-          <ul>
-            {studyplan.lessons && studyplan.lessons.length > 0 ? (
-              studyplan.lessons.map((lesson, index) => (
-                <li key={index}>{lesson.topic?.name || `Lekce #${index + 1}`}</li>
-              ))
-            ) : (
-              <p>Žádné lekce</p>
-            )}
-          </ul>
-    
-          <h3>Skupiny studentů</h3>
-          <ul>
-            {studyplan.lessons?.flatMap(l => l.studyGroups || []).map((group, index) => (
-              <li key={index}>{group.name}</li>
-            )) || <p>Žádné skupiny</p>}
-          </ul>
-    
-          <h3>Učebny</h3>
-          <ul>
-            {studyplan.lessons?.flatMap(l => l.facilities || []).map((room, index) => (
-              <li key={index}>{room.name}</li>
-            )) || <p>Žádné učebny</p>}
-          </ul>
-    
-          <h3>Vyučující</h3>
-          <ul>
-            {studyplan.lessons?.flatMap(l => l.instructors || []).map((i, index) => (
-              <li key={index}>{i.name} {i.surname}</li>
-            )) || <p>Žádní vyučující</p>}
-          </ul>
-    
-          <br />
-          {children}
+          <p><strong>ID:</strong> {studyplan.exam.id}</p>
+          <p><strong>Lastchange:</strong> {studyplan.exam.lastchange}</p>
         </>
-      );
-    };
-    
+      ) : (
+        <p>Žádná zkouška</p>
+      )}
+
+      <br />
+      {children}
+    </>
+  );
+};
+
