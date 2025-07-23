@@ -9,13 +9,17 @@ const EvaluationDeleteAsyncAction = createAsyncGraphQLAction(`mutation MyMutatio
   }
 }`);
 
-export const EvaluationDeleteButton = ({ evaluation, onDone = () => {} }) => {
+export const EvaluationDeleteButton = ({ evaluation, onDone = () => {}, readOnly }) => {
   const { fetch, loading } = useAsyncAction(EvaluationDeleteAsyncAction, {}, { deferred: true });
 
   const handleDelete = async () => {
     await fetch({ id: evaluation.id, lastchange: evaluation.lastchange });
     onDone();
   };
+
+  if (readOnly) {
+    return null;
+  }
 
   return (
     <button

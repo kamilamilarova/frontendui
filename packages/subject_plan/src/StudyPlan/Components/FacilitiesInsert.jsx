@@ -34,7 +34,7 @@ const LocalFacility = ({facility, onSelect}) => {
 }
 
 
-export const FacilitiesInsert = ({ onChoose }) => {
+export const FacilitiesInsert = ({ lesson, onChoose, readOnly }) => {
     const {loading, error, fetch} = useAsyncAction(
         InsertFacilityAsyncAction,
         {},
@@ -50,9 +50,19 @@ export const FacilitiesInsert = ({ onChoose }) => {
     const [delayer, setDelayer] = useState(() => CreateDelayer(500)); 
 
     const onSelect = async (facility) => {
-        console.log("onSelect", facility.id, facility.name)
-        onChoose(facility, fetchFacilityUpdate);
+        console.log("Přidávám do mutace:", {
+            planitemId: lesson.id,
+            facilityId: facility.id,
+            lesson,
+            facility
+        });
+        await fetchFacilityUpdate({ planitemId: lesson.id, facilityId: facility.id });
+        onChoose(facility);
         setFacilities([]);
+        // Vyprázdni input po výběru
+        if (inputRef.current) {
+            inputRef.current.value = "";
+        }
     }
 
     const onChange = (e) => {
@@ -68,6 +78,10 @@ export const FacilitiesInsert = ({ onChoose }) => {
         } else {
             setFacilities([]);
         }
+    }
+
+    if (readOnly) {
+        return null; // V režimu readOnly neukazujeme pole pro přidání
     }
 
     return (
@@ -88,6 +102,7 @@ export const FacilitiesInsert = ({ onChoose }) => {
                 onChange={onChange}
                 className="form-control"
                 placeholder="Zadejte název místnosti"
+                ref={inputRef}
             />
             {facilities &&
                 facilities.map((facility) => (

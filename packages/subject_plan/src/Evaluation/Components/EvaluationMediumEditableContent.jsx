@@ -35,9 +35,24 @@ export const EvaluationMediumEditableContent = ({evaluation, onChange=(e)=>null,
                 onChange={onChange}
                 onBlur={onBlur}
             >
-                <option value="">Vyberte...</option>
                 <option value="true">Ano</option>
                 <option value="false">Ne</option>
+            </select>
+            <label htmlFor="grade" className="form-label">Známka</label>
+            <select
+                id="grade"
+                className="form-control"
+                defaultValue={evaluation?.grade || ""}
+                onChange={onChange}
+                onBlur={onBlur}
+            >
+                <option value="">—</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
             </select>
             {children}
         </>

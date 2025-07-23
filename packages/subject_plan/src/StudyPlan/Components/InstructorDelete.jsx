@@ -18,7 +18,7 @@ fragment Error on StudyPlanLessonGQLModelUpdateError {
 }`)
 
 
-export const InstructorDelete = ({ lesson, user, onInstructorRemoved }) => {
+export const InstructorDelete = ({ lesson, user, onInstructorRemoved, readOnly }) => {
   const { fetch: removeInstructor, loading, error } = useAsyncAction(
     LessonUpdateAsyncAction,
     lesson,
@@ -37,6 +37,10 @@ export const InstructorDelete = ({ lesson, user, onInstructorRemoved }) => {
         alert("Nepodařilo se odebrat instruktora");
       });
   };
+
+  if (readOnly) {
+    return null;
+    }             // V režimu readOnly neukazujeme tlačítko pro odebrání instruktora}
 
   return (
     

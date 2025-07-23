@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Evaluation/Components/EvaluationMediumEditableContent.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Evaluation/Components/EvaluationMediumEditableContent.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Input } from "@hrbolek/uoisfrontend-shared"
+
+/**
+ * A component that displays medium-level content for an evaluation entity.
+ *
+ * This component renders a label "EvaluationMediumContent" followed by a serialized representation of the `evaluation` object
+ * and any additional child content. It is designed to handle and display information about an evaluation entity object.
+ *
+ * @component
+ * @param {Object} props - The properties for the EvaluationMediumContent component.
+ * @param {Object} props.evaluation - The object representing the evaluation entity.
+ * @param {string|number} props.evaluation.id - The unique identifier for the evaluation entity.
+ * @param {string} props.evaluation.name - The name or label of the evaluation entity.
+ * @param {React.ReactNode} [props.children=null] - Additional content to render after the serialized `evaluation` object.
+ *
+ * @returns {JSX.Element} A JSX element displaying the entity's details and optional content.
+ *
+ * @example
+ * // Example usage:
+ * const evaluationEntity = { id: 123, name: "Sample Entity" };
+ * 
+ * &lt;EvaluationMediumContent evaluation={evaluationEntity}>
+ *   &lt;p>Additional information about the entity.&lt;/p>
+ * &lt;/EvaluationMediumContent>
+ */
+export const EvaluationMediumEditableContent = ({evaluation, onChange=(e)=>null, onBlur=(e)=>null, children}) => {
+    return (
+        &lt;>           
+            &lt;Input id={"points"} label={"Body"} type="number" className="form-control" defaultValue={evaluation?.points || ""} onChange={onChange} onBlur={onBlur} />
+            &lt;label htmlFor="passed" className="form-label">Prošel&lt;/label>
+            &lt;select
+                id="passed"
+                className="form-control"
+                defaultValue={evaluation?.passed === true ? "true" : evaluation?.passed === false ? "false" : ""}
+                onChange={onChange}
+                onBlur={onBlur}
+            >
+                &lt;option value="">Vyberte...&lt;/option>
+                &lt;option value="true">Ano&lt;/option>
+                &lt;option value="false">Ne&lt;/option>
+            &lt;/select>
+            {children}
+        &lt;/>
+    )
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#EvaluationButton">EvaluationButton</a></li><li><a href="global.html#EvaluationCardCapsule">EvaluationCardCapsule</a></li><li><a href="global.html#EvaluationChildren">EvaluationChildren</a></li><li><a href="global.html#EvaluationLargeCard">EvaluationLargeCard</a></li><li><a href="global.html#EvaluationLink">EvaluationLink</a></li><li><a href="global.html#EvaluationMediumCard">EvaluationMediumCard</a></li><li><a href="global.html#EvaluationMediumContent">EvaluationMediumContent</a></li><li><a href="global.html#EvaluationMediumEditableContent">EvaluationMediumEditableContent</a></li><li><a href="global.html#EvaluationPage">EvaluationPage</a></li><li><a href="global.html#EvaluationPageContent">EvaluationPageContent</a></li><li><a href="global.html#EvaluationPageContentLazy">EvaluationPageContentLazy</a></li><li><a href="global.html#EvaluationPageNavbar">EvaluationPageNavbar</a></li><li><a href="global.html#EvaluationReadAsyncAction">EvaluationReadAsyncAction</a></li><li><a href="global.html#EvaluationRouterSegment">EvaluationRouterSegment</a></li><li><a href="global.html#EvaluationScalarAttribute">EvaluationScalarAttribute</a></li><li><a href="global.html#EvaluationVectorsAttribute">EvaluationVectorsAttribute</a></li><li><a href="global.html#ExamButton">ExamButton</a></li><li><a href="global.html#ExamCardCapsule">ExamCardCapsule</a></li><li><a href="global.html#ExamChildren">ExamChildren</a></li><li><a href="global.html#ExamLargeCard">ExamLargeCard</a></li><li><a href="global.html#ExamLink">ExamLink</a></li><li><a href="global.html#ExamMediumCard">ExamMediumCard</a></li><li><a href="global.html#ExamMediumContent">ExamMediumContent</a></li><li><a href="global.html#ExamMediumEditableContent">ExamMediumEditableContent</a></li><li><a href="global.html#ExamPage">ExamPage</a></li><li><a href="global.html#ExamPageContent">ExamPageContent</a></li><li><a href="global.html#ExamPageContentLazy">ExamPageContentLazy</a></li><li><a href="global.html#ExamPageNavbar">ExamPageNavbar</a></li><li><a href="global.html#ExamReadAsyncAction">ExamReadAsyncAction</a></li><li><a href="global.html#ExamRouterSegment">ExamRouterSegment</a></li><li><a href="global.html#ExamScalarAttribute">ExamScalarAttribute</a></li><li><a href="global.html#ExamVectorsAttribute">ExamVectorsAttribute</a></li><li><a href="global.html#StudyplanButton">StudyplanButton</a></li><li><a href="global.html#StudyplanCardCapsule">StudyplanCardCapsule</a></li><li><a href="global.html#StudyplanChildren">StudyplanChildren</a></li><li><a href="global.html#StudyplanFacilitiesAttribute">StudyplanFacilitiesAttribute</a></li><li><a href="global.html#StudyplanInstructorsAttribute">StudyplanInstructorsAttribute</a></li><li><a href="global.html#StudyplanLargeCard">StudyplanLargeCard</a></li><li><a href="global.html#StudyplanLessonsAttribute">StudyplanLessonsAttribute</a></li><li><a href="global.html#StudyplanLink">StudyplanLink</a></li><li><a href="global.html#StudyplanMediumCard">StudyplanMediumCard</a></li><li><a href="global.html#StudyplanMediumContent">StudyplanMediumContent</a></li><li><a href="global.html#StudyplanMediumEditableContent">StudyplanMediumEditableContent</a></li><li><a href="global.html#StudyplanPage">StudyplanPage</a></li><li><a href="global.html#StudyplanPageContent">StudyplanPageContent</a></li><li><a href="global.html#StudyplanPageContentLazy">StudyplanPageContentLazy</a></li><li><a href="global.html#StudyplanPageNavbar">StudyplanPageNavbar</a></li><li><a href="global.html#StudyplanPlaneventAttribute">StudyplanPlaneventAttribute</a></li><li><a href="global.html#StudyplanReadAsyncAction">StudyplanReadAsyncAction</a></li><li><a href="global.html#StudyplanRouterSegment">StudyplanRouterSegment</a></li><li><a href="global.html#StudyplanScalarAttribute">StudyplanScalarAttribute</a></li><li><a href="global.html#StudyplanSemesterAttribute">StudyplanSemesterAttribute</a></li><li><a href="global.html#StudyplanStudygroupsAttribute">StudyplanStudygroupsAttribute</a></li><li><a href="global.html#StudyplanSubjectAttribute">StudyplanSubjectAttribute</a></li><li><a href="global.html#StudyplanTopicAttribute">StudyplanTopicAttribute</a></li><li><a href="global.html#StudyplanVectorsAttribute">StudyplanVectorsAttribute</a></li><li><a href="global.html#StudyplanlessonButton">StudyplanlessonButton</a></li><li><a href="global.html#StudyplanlessonCardCapsule">StudyplanlessonCardCapsule</a></li><li><a href="global.html#StudyplanlessonChildren">StudyplanlessonChildren</a></li><li><a href="global.html#StudyplanlessonLargeCard">StudyplanlessonLargeCard</a></li><li><a href="global.html#StudyplanlessonLink">StudyplanlessonLink</a></li><li><a href="global.html#StudyplanlessonMediumCard">StudyplanlessonMediumCard</a></li><li><a href="global.html#StudyplanlessonMediumContent">StudyplanlessonMediumContent</a></li><li><a href="global.html#StudyplanlessonMediumEditableContent">StudyplanlessonMediumEditableContent</a></li><li><a href="global.html#StudyplanlessonPage">StudyplanlessonPage</a></li><li><a href="global.html#StudyplanlessonPageContent">StudyplanlessonPageContent</a></li><li><a href="global.html#StudyplanlessonPageContentLazy">StudyplanlessonPageContentLazy</a></li><li><a href="global.html#StudyplanlessonPageNavbar">StudyplanlessonPageNavbar</a></li><li><a href="global.html#StudyplanlessonReadAsyncAction">StudyplanlessonReadAsyncAction</a></li><li><a href="global.html#StudyplanlessonRouterSegment">StudyplanlessonRouterSegment</a></li><li><a href="global.html#StudyplanlessonScalarAttribute">StudyplanlessonScalarAttribute</a></li><li><a href="global.html#StudyplanlessonVectorsAttribute">StudyplanlessonVectorsAttribute</a></li><li><a href="global.html#TitleNavButton">TitleNavButton</a></li><li><a href="global.html#TopicButton">TopicButton</a></li><li><a href="global.html#TopicCardCapsule">TopicCardCapsule</a></li><li><a href="global.html#TopicChildren">TopicChildren</a></li><li><a href="global.html#TopicLargeCard">TopicLargeCard</a></li><li><a href="global.html#TopicLink">TopicLink</a></li><li><a href="global.html#TopicMediumCard">TopicMediumCard</a></li><li><a href="global.html#TopicMediumContent">TopicMediumContent</a></li><li><a href="global.html#TopicMediumEditableContent">TopicMediumEditableContent</a></li><li><a href="global.html#TopicPage">TopicPage</a></li><li><a href="global.html#TopicPageContent">TopicPageContent</a></li><li><a href="global.html#TopicPageContentLazy">TopicPageContentLazy</a></li><li><a href="global.html#TopicPageNavbar">TopicPageNavbar</a></li><li><a href="global.html#TopicReadAsyncAction">TopicReadAsyncAction</a></li><li><a href="global.html#TopicRouterSegment">TopicRouterSegment</a></li><li><a href="global.html#TopicScalarAttribute">TopicScalarAttribute</a></li><li><a href="global.html#TopicVectorsAttribute">TopicVectorsAttribute</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Jul 23 2025 15:39:48 GMT+0200 (středoevropský letní čas)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

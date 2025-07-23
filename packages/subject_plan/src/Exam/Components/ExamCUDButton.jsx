@@ -68,7 +68,7 @@ import { ExamMediumEditableContent } from "./ExamMediumEditableContent";
  *
  * @returns {JSX.Element} The dynamically selected button component for the specified operation.
  */
-export const ExamButton = ({ operation, children, exam, onDone = () => {}, ...props }) => {
+export const ExamButton = ({ operation, children, exam, onDone = () => {}, readOnly, ...props}) => {
     const operationConfig = {
         C: {
             asyncAction: ExamInsertAsyncAction,
@@ -121,6 +121,10 @@ export const ExamButton = ({ operation, children, exam, onDone = () => {}, ...pr
     // Validate required fields for "U" and "D"
     if ((operation === 'U' || operation === 'D') && !exam?.id) {
         return <ErrorHandler errors={`For '${operation}' operation, 'exam' must include an 'id' key.`} />;
+    }
+
+    if (readOnly) {
+        return null; // In readOnly mode, do not show the button
     }
 
     return (<>

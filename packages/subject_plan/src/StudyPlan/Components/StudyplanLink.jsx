@@ -1,6 +1,6 @@
 import { ProxyLink } from "@hrbolek/uoisfrontend-shared"
 
-export const StudyplanURI = `/studyplan/studyplan/view/`;
+export const StudyplanURI = '/studyplan/studyplan/view/';
 
 /**
  * A React component that renders a `ProxyLink` to an "studyplan" entity's view page.
@@ -29,6 +29,15 @@ export const StudyplanURI = `/studyplan/studyplan/view/`;
  *
  * @see ProxyLink - The base component used for rendering the link.
  */
-export const StudyplanLink = ({studyplan, ...props}) => {
-    return <ProxyLink to={StudyplanURI + studyplan.id} {...props}>{studyplan.name}</ProxyLink>
-}
+/*export const StudyplanLink = ({studyplan}) => {
+    return <ProxyLink to={StudyplanURI + studyplan.id}>{studyplan.name}</ProxyLink>
+}*/
+export const StudyplanLink = ({ studyplan }) => {
+  if (!studyplan || !studyplan.id) return null;
+
+  return (
+    <ProxyLink to={StudyplanURI + studyplan.id}>
+      {studyplan.name || "Studijní plán"}
+    </ProxyLink>
+  );
+};

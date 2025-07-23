@@ -67,7 +67,7 @@ import { EvaluationMediumEditableContent } from "./EvaluationMediumEditableConte
  *
  * @returns {JSX.Element} The dynamically selected button component for the specified operation.
  */
-export const EvaluationButton = ({ operation, children, evaluation, onDone = () => {}, ...props }) => {
+export const EvaluationButton = ({ operation, children, evaluation, onDone = () => {}, readOnly, ...props }) => {
     const operationConfig = {
         C: {
             asyncAction: EvaluationInsertAsyncAction,
@@ -101,10 +101,14 @@ export const EvaluationButton = ({ operation, children, evaluation, onDone = () 
 
     const { error, loading, fetch, entity } = useAsyncAction(asyncAction, evaluation, { deferred: true });
     const handleClick = async (params = {}) => {
+        console.log("handleClick params:", params); // <-- přidej tento řádek
         const parseNumber = (val) => {
             const num = parseInt(val, 10);
             return !isNaN(num) ? num : undefined;
         };
+        const allowedGrades = ["A", "B", "C", "D", "E", "F"];
+        const gradeValue = allowedGrades.includes(params.grade) ? params.grade : undefined;
+        console.log("gradeValue:", gradeValue); // <-- přidej tento řádek
         const fetchParams = {
             ...evaluation,
             ...params,
@@ -121,7 +125,9 @@ export const EvaluationButton = ({ operation, children, evaluation, onDone = () 
                       params.passed === "0"
                     ? false
                     : undefined,
+            grade: gradeValue,
         };
+        console.log("fetchParams:", fetchParams); // <-- přidej tento řádek
         const freshEvaluation = await fetch(fetchParams);
         onDone(freshEvaluation);
     };
@@ -129,6 +135,10 @@ export const EvaluationButton = ({ operation, children, evaluation, onDone = () 
     // Validate required fields for "U" and "D"
     if ((operation === 'U' || operation === 'D') && !evaluation?.id) {
         return <ErrorHandler errors={`For '${operation}' operation, 'evaluation' must include an 'id' key.`} />;
+    }
+
+    if (readOnly) {
+        return null; // In readOnly mode, do not show the button
     }
 
     return (<>

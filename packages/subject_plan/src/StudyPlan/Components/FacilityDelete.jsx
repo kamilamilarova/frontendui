@@ -18,7 +18,7 @@ fragment Error on StudyPlanLessonGQLModelUpdateError {
 }`)
 
 
-export const FacilityDelete = ({ lesson, facility, onFacilityRemoved }) => {
+export const FacilityDelete = ({ lesson, facility, onFacilityRemoved, readOnly }) => {
   const { fetch: removeFacility, loading, error } = useAsyncAction(
     FacilityUpdateAsyncAction,
     lesson,
@@ -37,6 +37,10 @@ export const FacilityDelete = ({ lesson, facility, onFacilityRemoved }) => {
         alert("Nepodařilo se odebrat učebnu");
       });
   };
+
+  if (readOnly) {
+    return null; // V režimu readOnly neukazujeme tlačítko 
+  }
 
   return (
     

@@ -44,7 +44,7 @@ const InsertExamAsyncAction = createAsyncGraphQLAction(`mutation MyMutation($id:
 }`);
 
 
-export const ExamInsert = ({studyplan, onDone}) => {
+export const ExamInsert = ({studyplan, onDone = () => {}, readOnly}) => {
     const { fetch: fetchInsert, loading, error } = useAsyncAction(
         InsertExamAsyncAction,
         {},
@@ -72,9 +72,9 @@ export const ExamInsert = ({studyplan, onDone}) => {
                     examId: examResult.id
                 };
                 await fetchInsert(insertParams);
-                alert("Zkouška přidána!");
+                //alert("Zkouška přidána!");
                 setName("");
-                onDone?.();
+                onDone();
             } else {
                 alert("Zkoušku se nepodařilo vytvořit.");
                 // Výpis detailní chyby:
@@ -88,26 +88,32 @@ export const ExamInsert = ({studyplan, onDone}) => {
         }
     };
 
+    if (readOnly) {
+        return null; // V režimu readOnly neukazujeme pole pro přidání
+    }
+
     return (
-        <div>
+        <div className="d-flex align-items-end mb-2" style={{ gap: "0.5rem" }}>
             <input
                 className="form-control"
                 type="text"
                 placeholder="Název zkoušky"
                 value={name}
                 onChange={e => setName(e.target.value)}
-                disabled={loading || loadingExam}
+                disabled={readOnly}
+                style={{ maxWidth: 400 }}
             />
             <button
-                className="btn btn-primary mt-2"
+                className="btn btn-primary"
                 onClick={onCreate}
-                disabled={loading || loadingExam || !name.trim()}
+                disabled={readOnly || !name.trim()}
+                type="button"
             >
-                Přidat zkoušku
+                Vytvořit zkoušku
             </button>
-            {(loading || loadingExam) && <div>Probíhá přidávání zkoušky...</div>}
+
+            {loading && <div>Probíhá vytváření zkoušky…</div>}
             {error && <div style={{ color: "red" }}>Chyba: {error.message}</div>}
-            {errorExam && <div style={{ color: "red" }}>Chyba: {errorExam.message}</div>}
         </div>
     );
 };

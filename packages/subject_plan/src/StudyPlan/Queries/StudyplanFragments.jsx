@@ -42,13 +42,12 @@ fragment StudyplanLarge on StudyPlanGQLModel {
     name
     id
     lastchange
-    order
     length
-    lessontypeId
     event {
       startdate
       enddate
     }
+    lessontypeId
     instructors {
       id
       name
@@ -76,12 +75,27 @@ fragment StudyplanLarge on StudyPlanGQLModel {
     maxScore
     description
     lastchange
+    parts {
+      id
+      name
+      description
+      minScore
+      maxScore
+      lastchange
+    }
     evaluations {
       id
       points
       passed
+      grade
       studentId
       lastchange
+      student {
+        student {
+          name
+          surname
+        }
+      }
     }
   }
     

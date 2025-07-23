@@ -4,9 +4,9 @@ import { CreateDelayer } from "@hrbolek/uoisfrontend-shared";
 
 
 const InsertStudyPlanLessonAsyncAction = createAsyncGraphQLAction(
-    `mutation MyMutation($planId: UUID!, $topicId: UUID!, $lessontypeId: UUID!, $id: UUID, $name: String, $length: Int) {
+    `mutation MyMutation($planId: UUID!, $topicId: UUID!, $lessontypeId: UUID!, $id: UUID, $name: String, $length: Int, $eventId: UUID!) {
   studyPlanLessonInsert(
-    studyPlanLesson: {lessontypeId: $lessontypeId, planId: $planId, topicId: $topicId, id: $id, name: $name, length: $length}
+    studyPlanLesson: {lessontypeId: $lessontypeId, planId: $planId, topicId: $topicId, id: $id, name: $name, length: $length, eventId: $eventId}
   ) {
     __typename
     ...Error
@@ -51,7 +51,7 @@ fragment StudyPlanLesson on StudyPlanLessonGQLModel {
   }
 }`)
 
-export const StudyPlanLessonData = ({studyplan}) => {
+export const StudyPlanLessonData = ({studyplan, onDone = () => {}, readOnly }) => {
   const { fetch: fetchInsert, loading, error } = useAsyncAction(
     InsertStudyPlanLessonAsyncAction,
     {},
@@ -69,13 +69,15 @@ export const StudyPlanLessonData = ({studyplan}) => {
       planId: studyplan.id,//"8bde6144-7b82-46d1-ba38-aaab9fa54191",
       topicId: "ef1c48b7-4f65-4696-b89f-a95c2cf8814f",
       lessontypeId: "e2b7cbf6-95e1-11ed-a1eb-0242ac120002",
+      eventId: crypto.randomUUID(), // pokud je potřeba, jinak může být undefined
     };
 
     fetchInsert(insertParams )
       .then((json) => {
         console.log("Lekce vytvořena:", json);
-        alert("Lekce vytvořena!");
+        //alert("Lekce vytvořena!");
         setName("");
+        onDone(); // volání callbacku pro aktualizaci UI
         
         
         // TODO: doplnit třeba refetch dat nebo dispatch update
@@ -86,21 +88,25 @@ export const StudyPlanLessonData = ({studyplan}) => {
       });
   };
 
+  // Pokud je readOnly, nezobrazuj input ani tlačítko
+  if (readOnly) return null;
+
   return (
-    <div>
-      <h3>Vytvořit novou lekci</h3>
+    <div className="d-flex align-items-end mb-2" style={{ gap: "0.5rem" }}>
       <input
         className="form-control"
         type="text"
         placeholder="Název lekce"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        disabled={loading}
+        disabled={readOnly}
+        style={{ maxWidth: 400 }}
       />
       <button
-        className="btn btn-primary mt-2"
+        className="btn btn-primary"
         onClick={onCreate}
-        disabled={loading || !name.trim()}
+        disabled={readOnly || !name.trim()}
+        type="button"
       >
         Vytvořit lekci
       </button>

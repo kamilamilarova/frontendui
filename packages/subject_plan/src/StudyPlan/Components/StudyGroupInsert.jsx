@@ -40,7 +40,7 @@ const LocalGroup = ({group, onSelect}) => {
 
 
 
-export const StudyGroupInsert = ({onChoose}) => {
+export const StudyGroupInsert = ({onChoose, readOnly}) => {
   const {loading, error, fetch} = useAsyncAction(
     QueryGroupAsyncAction,
     {},
@@ -50,7 +50,7 @@ export const StudyGroupInsert = ({onChoose}) => {
       GroupUpdateAsyncAction,
     {},
     { deferred: true }
-  );//tady bude mutace)
+  );  
 
   const inputRef = useRef(null);
   const [groups, setGroups] = useState([]);
@@ -61,6 +61,9 @@ export const StudyGroupInsert = ({onChoose}) => {
     console.log("onSelect", group.id, group.name)
     onChoose(group, fetchGroupUpdate);
         setGroups([]);
+        if (inputRef.current) {
+        inputRef.current.value = "";
+    }
   }
 
    const onChange = (e) => {
@@ -80,6 +83,10 @@ export const StudyGroupInsert = ({onChoose}) => {
     }
    }
 
+  if (readOnly) {
+    return null; // Pokud je readOnly, nic nezobrazíme
+  }
+
   return (
         <div ref={inputRef}
         style={{
@@ -98,6 +105,7 @@ export const StudyGroupInsert = ({onChoose}) => {
             onChange={onChange}
             className="form-control"
             placeholder="Zadejte název skupiny"
+            ref={inputRef}
           />
           {groups &&
             groups.map((group) => {

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Exam/Pages/ExamRouterSegment.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Exam/Pages/ExamRouterSegment.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { ExamURI } from "../Components/ExamLink"
+import { ExamPage } from "./ExamPage"
+
+/**
+ * A router segment definition for the Exam page.
+ *
+ * This object defines a route path and its associated React element.
+ * The `path` property is constructed using a base URI stored in `ExamURI`
+ * and expects an `id` parameter. The `element` property specifies the React
+ * component to render when the route matches.
+ *
+ * @constant {Object} ExamRouterSegment
+ * @property {string} path - The URL path pattern for the route, e.g., "/exam/exam/view/:id".
+ * @property {JSX.Element} element - The React element (component) to render, in this case, &lt;ExamPage />.
+ */
+export const ExamRouterSegment = {
+    path: `/${ExamURI}:id`,
+    element: &lt;ExamPage />,
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#EvaluationButton">EvaluationButton</a></li><li><a href="global.html#EvaluationCardCapsule">EvaluationCardCapsule</a></li><li><a href="global.html#EvaluationChildren">EvaluationChildren</a></li><li><a href="global.html#EvaluationLargeCard">EvaluationLargeCard</a></li><li><a href="global.html#EvaluationLink">EvaluationLink</a></li><li><a href="global.html#EvaluationMediumCard">EvaluationMediumCard</a></li><li><a href="global.html#EvaluationMediumContent">EvaluationMediumContent</a></li><li><a href="global.html#EvaluationMediumEditableContent">EvaluationMediumEditableContent</a></li><li><a href="global.html#EvaluationPage">EvaluationPage</a></li><li><a href="global.html#EvaluationPageContent">EvaluationPageContent</a></li><li><a href="global.html#EvaluationPageContentLazy">EvaluationPageContentLazy</a></li><li><a href="global.html#EvaluationPageNavbar">EvaluationPageNavbar</a></li><li><a href="global.html#EvaluationReadAsyncAction">EvaluationReadAsyncAction</a></li><li><a href="global.html#EvaluationRouterSegment">EvaluationRouterSegment</a></li><li><a href="global.html#EvaluationScalarAttribute">EvaluationScalarAttribute</a></li><li><a href="global.html#EvaluationVectorsAttribute">EvaluationVectorsAttribute</a></li><li><a href="global.html#ExamButton">ExamButton</a></li><li><a href="global.html#ExamCardCapsule">ExamCardCapsule</a></li><li><a href="global.html#ExamChildren">ExamChildren</a></li><li><a href="global.html#ExamLargeCard">ExamLargeCard</a></li><li><a href="global.html#ExamLink">ExamLink</a></li><li><a href="global.html#ExamMediumCard">ExamMediumCard</a></li><li><a href="global.html#ExamMediumContent">ExamMediumContent</a></li><li><a href="global.html#ExamMediumEditableContent">ExamMediumEditableContent</a></li><li><a href="global.html#ExamPage">ExamPage</a></li><li><a href="global.html#ExamPageContent">ExamPageContent</a></li><li><a href="global.html#ExamPageContentLazy">ExamPageContentLazy</a></li><li><a href="global.html#ExamPageNavbar">ExamPageNavbar</a></li><li><a href="global.html#ExamReadAsyncAction">ExamReadAsyncAction</a></li><li><a href="global.html#ExamRouterSegment">ExamRouterSegment</a></li><li><a href="global.html#ExamScalarAttribute">ExamScalarAttribute</a></li><li><a href="global.html#ExamVectorsAttribute">ExamVectorsAttribute</a></li><li><a href="global.html#StudyplanButton">StudyplanButton</a></li><li><a href="global.html#StudyplanCardCapsule">StudyplanCardCapsule</a></li><li><a href="global.html#StudyplanChildren">StudyplanChildren</a></li><li><a href="global.html#StudyplanFacilitiesAttribute">StudyplanFacilitiesAttribute</a></li><li><a href="global.html#StudyplanInstructorsAttribute">StudyplanInstructorsAttribute</a></li><li><a href="global.html#StudyplanLargeCard">StudyplanLargeCard</a></li><li><a href="global.html#StudyplanLessonsAttribute">StudyplanLessonsAttribute</a></li><li><a href="global.html#StudyplanLink">StudyplanLink</a></li><li><a href="global.html#StudyplanMediumCard">StudyplanMediumCard</a></li><li><a href="global.html#StudyplanMediumContent">StudyplanMediumContent</a></li><li><a href="global.html#StudyplanMediumEditableContent">StudyplanMediumEditableContent</a></li><li><a href="global.html#StudyplanPage">StudyplanPage</a></li><li><a href="global.html#StudyplanPageContent">StudyplanPageContent</a></li><li><a href="global.html#StudyplanPageContentLazy">StudyplanPageContentLazy</a></li><li><a href="global.html#StudyplanPageNavbar">StudyplanPageNavbar</a></li><li><a href="global.html#StudyplanPlaneventAttribute">StudyplanPlaneventAttribute</a></li><li><a href="global.html#StudyplanReadAsyncAction">StudyplanReadAsyncAction</a></li><li><a href="global.html#StudyplanRouterSegment">StudyplanRouterSegment</a></li><li><a href="global.html#StudyplanScalarAttribute">StudyplanScalarAttribute</a></li><li><a href="global.html#StudyplanSemesterAttribute">StudyplanSemesterAttribute</a></li><li><a href="global.html#StudyplanStudygroupsAttribute">StudyplanStudygroupsAttribute</a></li><li><a href="global.html#StudyplanSubjectAttribute">StudyplanSubjectAttribute</a></li><li><a href="global.html#StudyplanTopicAttribute">StudyplanTopicAttribute</a></li><li><a href="global.html#StudyplanVectorsAttribute">StudyplanVectorsAttribute</a></li><li><a href="global.html#StudyplanlessonButton">StudyplanlessonButton</a></li><li><a href="global.html#StudyplanlessonCardCapsule">StudyplanlessonCardCapsule</a></li><li><a href="global.html#StudyplanlessonChildren">StudyplanlessonChildren</a></li><li><a href="global.html#StudyplanlessonLargeCard">StudyplanlessonLargeCard</a></li><li><a href="global.html#StudyplanlessonLink">StudyplanlessonLink</a></li><li><a href="global.html#StudyplanlessonMediumCard">StudyplanlessonMediumCard</a></li><li><a href="global.html#StudyplanlessonMediumContent">StudyplanlessonMediumContent</a></li><li><a href="global.html#StudyplanlessonMediumEditableContent">StudyplanlessonMediumEditableContent</a></li><li><a href="global.html#StudyplanlessonPage">StudyplanlessonPage</a></li><li><a href="global.html#StudyplanlessonPageContent">StudyplanlessonPageContent</a></li><li><a href="global.html#StudyplanlessonPageContentLazy">StudyplanlessonPageContentLazy</a></li><li><a href="global.html#StudyplanlessonPageNavbar">StudyplanlessonPageNavbar</a></li><li><a href="global.html#StudyplanlessonReadAsyncAction">StudyplanlessonReadAsyncAction</a></li><li><a href="global.html#StudyplanlessonRouterSegment">StudyplanlessonRouterSegment</a></li><li><a href="global.html#StudyplanlessonScalarAttribute">StudyplanlessonScalarAttribute</a></li><li><a href="global.html#StudyplanlessonVectorsAttribute">StudyplanlessonVectorsAttribute</a></li><li><a href="global.html#TitleNavButton">TitleNavButton</a></li><li><a href="global.html#TopicButton">TopicButton</a></li><li><a href="global.html#TopicCardCapsule">TopicCardCapsule</a></li><li><a href="global.html#TopicChildren">TopicChildren</a></li><li><a href="global.html#TopicLargeCard">TopicLargeCard</a></li><li><a href="global.html#TopicLink">TopicLink</a></li><li><a href="global.html#TopicMediumCard">TopicMediumCard</a></li><li><a href="global.html#TopicMediumContent">TopicMediumContent</a></li><li><a href="global.html#TopicMediumEditableContent">TopicMediumEditableContent</a></li><li><a href="global.html#TopicPage">TopicPage</a></li><li><a href="global.html#TopicPageContent">TopicPageContent</a></li><li><a href="global.html#TopicPageContentLazy">TopicPageContentLazy</a></li><li><a href="global.html#TopicPageNavbar">TopicPageNavbar</a></li><li><a href="global.html#TopicReadAsyncAction">TopicReadAsyncAction</a></li><li><a href="global.html#TopicRouterSegment">TopicRouterSegment</a></li><li><a href="global.html#TopicScalarAttribute">TopicScalarAttribute</a></li><li><a href="global.html#TopicVectorsAttribute">TopicVectorsAttribute</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Jul 23 2025 15:39:48 GMT+0200 (středoevropský letní čas)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

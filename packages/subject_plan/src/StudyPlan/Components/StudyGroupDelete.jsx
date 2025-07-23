@@ -18,7 +18,7 @@ fragment Error on StudyPlanLessonGQLModelUpdateError {
 }`)
 
 
-export const StudyGroupDelete = ({ lesson, group, onGroupRemoved }) => {
+export const StudyGroupDelete = ({ lesson, group, onGroupRemoved, readOnly }) => {
   const { fetch: removeStudyGroup, loading, error } = useAsyncAction(
     GroupUpdateAsyncAction,
     lesson,
@@ -37,6 +37,10 @@ export const StudyGroupDelete = ({ lesson, group, onGroupRemoved }) => {
         alert("Nepodařilo se odebrat studijní skupinu");
       });
   };
+
+  if (readOnly) {
+    return null; // V režimu readOnly neukazujeme tlačítko
+  }
 
   return (
     

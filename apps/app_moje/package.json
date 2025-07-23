@@ -1,5 +1,5 @@
 {
-  "name": "@milarova/app_moje",
+  "name": "@hanak/app_moje",    
   "private": true,
   "version": "0.5.0",
   "type": "module",
@@ -21,9 +21,10 @@
     "@hrbolek/uoisfrontend-shared": "*",
     "@hrbolek/uoisfrontend-gql-shared": "*",
     "@hrbolek/uoisfrontend-ug": "*",
+    "@hrbolek/uoisfrontend-ug2": "*",
     "@hrbolek/uoisfrontend-requests": "*",
-    "@hrbolek/uoisfrontend-zp": "*",
-    "@milarova/uoisfrontend-subject_plan" : "*"
+    "@hanak/uoisfrontend-subject_plan": "*"
+
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",

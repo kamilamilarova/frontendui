@@ -44,7 +44,7 @@ export const SemestrTestInsert = ({studyplan}) => {
     fetchInsert(insertParams)
       .then((json) => {
         console.log("Semestrální test přidán!:", json);
-        alert("Semestrální test přidán!");
+        //alert("Semestrální test přidán!");
       }).catch((err) => {
         console.error("Chyba při přidávání semestrálního testu", err);
         alert("Chyba při přidávání semestrálního testu");

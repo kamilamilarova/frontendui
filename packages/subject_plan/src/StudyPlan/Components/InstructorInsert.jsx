@@ -41,7 +41,7 @@ const LocalInstructor = ({ user, onSelect }) => {
     )
 }
 
-export const InstructorInsert = ({onChoose}) => {
+export const InstructorInsert = ({onChoose, readOnly}) => {
     const { loading, error, fetch } = useAsyncAction(
         QueryInstructorAsyncAction,
         {},
@@ -60,6 +60,9 @@ export const InstructorInsert = ({onChoose}) => {
     const onSelect = async (user) => {
         onChoose(user, fetchLessonUpdate);
         setUsers([]);
+        if (inputRef.current) {
+            inputRef.current.value = ""; // Vyprázdní input
+        }
     }
     const onChange = (e) => {
         const data = e.target.value;
@@ -76,6 +79,10 @@ export const InstructorInsert = ({onChoose}) => {
         else {
             setUsers([]);
         }
+    }
+    
+    if (readOnly) {
+        return null; // Pokud je readOnly, nic nezobrazíme
     }
 
     return (
@@ -96,6 +103,7 @@ export const InstructorInsert = ({onChoose}) => {
                 onChange={onChange}
                 className="form-control"
                 placeholder="Zadejte jméno instruktora"
+                ref={inputRef}
             />
             {users &&
                 users.map((user) => {
