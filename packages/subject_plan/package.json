@@ -1,5 +1,5 @@
 {
-  "name": "@hanak/uoisfrontend-subject_plan",
+  "name": "@milarova/uoisfrontend-subject_plan",
   "version": "0.5.0",
   "main": "src/index.js",
   "scripts": {
@@ -7,7 +7,7 @@
     "docs": "jsdoc -c jsdoc.json"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": "",
   "dependencies": {
     "react-bootstrap-icons": "^1.11.5",
